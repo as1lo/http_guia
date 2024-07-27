@@ -1,0 +1,158 @@
+-------------------| HTTP |-------------------
+
+HyperText Transfer Protocol:
+Protocolo de transferência de dados na web
+
+REQUISIÇÃO (request) -----------------------------------------------------------------------
+
+Métodos:
+	(GET) Recupera dados.
+
+	(POST) Envia dados.
+		POST /users HTTP/1.1
+		Host: www.example.com
+		Content-Type: application/json
+		Content-Length: 34
+
+		{
+  		   "name": "John",
+ 		   "email": "john@example.com"
+		}
+
+	(PUT) Envia dados para substituir/atualizar um recurso.
+		PUT /users HTTP/1.1
+		Host: www.example.com
+		Content-Type: application/json
+		Content-Length: 34
+
+		{
+  		   "name": "John",
+ 		   "email": "john.updated@example.com"
+		}
+	
+
+	(DELETE) Remove um recurso/deleta registro.
+		DELETE /users HTTP/1.1
+		Host: www.example.com
+
+
+	(PATCH) Atualiza um recurso específico.
+		PATCH /users HTTP/1.1
+		Host: www.example.com
+		Content-Type: application/json
+		Content-Length: 20
+
+		{
+   		   "email": "new@example.com"
+		}
+
+
+	(HEAD) Recupera os cabeçalhos de resposta de um recurso específico.
+		HEAD /users/1 HTTP/1.1
+		Host: www.example.com
+
+
+	(OPTIONS) Recupera as opções de comunicação suportadas para um recurso específico.
+		HEAD /users/1 HTTP/1.1
+		Host: www.example.com
+
+
+	(CONNECT) Estabelece um túnel para o servidor identificado pelo recurso alvo.
+		CONNECT www.example.com:443 HTTP/1.1
+
+
+	(TRACE) Recupera as opções de comunicação suportadas para um recurso específico.
+		TRACE /path/resource HTTP/1.1
+		Host: www.example.com
+
+
+
+Sintaxe:
+-> 
+
+Linha de requisição: método HTTP/caminho do recurso/versão do protocolo.
+
+Cabeçalhos de Requisição: Proporcionam informações adicionais sobre a requisição.
+	Host: nome do host e (opcional) a porta do servidor onde a request está sendo enviada
+	
+	User-Agent: Identifica o cliente (normalmente navegador) que está fazendo a requisição
+	
+	Accept: Indica quais tipos de mídia o cliente é capaz de processar.
+	
+	Content-Type: Indica o tipo de mídia do corpo da requisição (quando presente)(aplication/JSON).
+	
+	Authorization: Contém credenciais para autenticação da requisição.
+
+	Cookie: Permitir guardar estado.
+
+Corpo da Requisição: (opcional) contém dados enviados ao servidor.
+
+->
+	
+	Ex.: GET /index.html HTTP/1.1
+	     Host: www.example.com
+	     User-Agent: Mozilla/5.0
+	     Accept: text/html
+ 
+
+
+RESPOSTAS (response) -----------------------------------------------------------------------
+
+
+Sintaxe:
+-> 
+
+Linha de status: Contém a versão do protocolo, um código de status e uma mensagem de status.
+
+Cabeçalhos de resposta: Proporcionam informações adicionais sobre a resposta.
+	Content-Type: Indica o tipo de mídia do corpo da resposta.
+
+	Content-Length: Indica o tamanho do corpo da resposta, em bytes.
+
+	Set-Cookie: Envia cookies do servidor para o agente de usuário.
+
+	Server: Fornece informações gerais sobre o software que está lidando com a requisição.
+
+	WWW-Authenticate: Indicado em respostas erro 401 (não autorizado).
+
+	Cache-Control: Direciona caches sobre como devem comportar-se com a resposta.
+
+	Location: Usado em respostas de redirecionamento ou quando um novo recurso é criado.
+
+	Corpo da resposta (opcional): Contém os dados solicitados.
+
+->
+	
+	Ex.: HTTP/1.1 200 OK
+	     Content-Type: text/html
+	     Content-Length: 137
+
+	     <html><body><h1>Olá, mundo!</h1></body></html>
+
+
+
+
+Famílias de Códigos de Status: 
+
+1xx - Informativo - Indica que a requisição foi recebida e o processo continua.
+
+2xx - Sucesso - Indica que a requisição foi recebida, compreendida e aceita.
+
+3xx - Redirecionamento - Indica que uma ação adicional deve ser tomada para completar a requisição.
+
+4xx - Erro de Cliente
+
+	(400) Bad Request: Sintaxe incorreta.
+	(401) Unauthorized: não autenticado/autorizado.
+	(402) Payment Required: Pagamento Necessário.
+	(403) Forbidden: Acesso proibido.
+	(404) Not Found: Não encontrou o recurso.
+
+5xx - Erro no Servidor
+
+	(500) Internal Server Error: Erro interno do servidor.
+	(501) Not Implemented: Método não implementado.
+	(502) Bad Gateway: Gateway inválido.
+	(503) Service Unavailable: Serviço Indisponpivel (sobrecarga/manutenção)
+	(504) Gateway Timeout: resposta fora do tempo limite.
+	(505) HTTP version Not Supported: servidor não suporta a versão no protocolo de acesso
